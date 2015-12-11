@@ -29,9 +29,17 @@ public class DatabaseAccess {
          ResultSet rs = stmt.executeQuery(query);
          
          System.out.print(rs);
-      } catch (IOException e) {
-         System.output.println("error");
-         throw e;
+         
+         //While results has next, print order
+         while(rs.next()){
+             System.out.print(rs.getString("OrderID"));
+             System.out.print(rs.getString("OrderDate"));
+
+             System.out.println();
+         }
+      } catch (Exception e) {
+         System.out.println("error");
+         e.printStackTrace();
       }
       
 		// DUMMY DATA!
