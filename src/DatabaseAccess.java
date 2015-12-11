@@ -1,7 +1,11 @@
 import java.util.Date;
 
 import javax.swing.JOptionPane;
-
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DatabaseAccess {
 	
@@ -9,7 +13,27 @@ public class DatabaseAccess {
 	{
 		// TODO:  Query the database and retrieve the information.
 		// resultset.findcolumn(string col)
-		
+      
+      String url = "jdbc:sqlserver://is-fleming.ischool.uw.edu";
+      String user = "perry";
+      String pass = "Info340C";
+      
+      try {
+         Connection conn = DriverManager.getConnection(url, user, pass);
+         conn.setCatalog("Store");
+      
+         String query = "SELECT * FROM Orders";
+         
+         //Call query and store in memory as rs
+         Statement stmt = conn.createStatement();
+         ResultSet rs = stmt.executeQuery(query);
+         
+         System.out.print(rs);
+      } catch (IOException e) {
+         System.output.println("error");
+         throw e;
+      }
+      
 		// DUMMY DATA!
 		Order o = new Order();
 		o.OrderID = 1;
